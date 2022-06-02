@@ -1,0 +1,17 @@
+.grid {
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  --grid-size: 16;
+  display: grid;
+  background-color: black;
+  gap: 0.1rem;
+  border: 0.1rem solid black;
+  grid-template-columns: repeat(var(--grid-size), 1fr);
+  grid-template-rows: repeat(var(--grid-size), 1fr);
+}
+
+.cell {
+  background-color: white;
+  width: auto;
+  height: auto;
+}
