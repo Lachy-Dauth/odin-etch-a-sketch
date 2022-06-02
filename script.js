@@ -4,9 +4,9 @@ const main = document.createElement("div");
 const gridSlider = document.querySelector("#grid-slider");
 const colorPick = document.querySelector("#color-pick");
 
-let randomColor = true;
+let colorMode = "darken";
 
-let color = "#000"
+let color = "#111111"
 
 main.classList.add("grid");
 
@@ -21,12 +21,23 @@ window.onmouseup = () => {
 }
 
 function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+  let color = [];
+  for (let i = 0; i < 3; i++) {
+    color.push(Math.floor(Math.random() * 256));
   }
-  return color;
+  console.log("rgb(" + color.join(", ") + ")");
+  return "rgb(" + color.join(", ") + ")";
+}
+
+function colorDarken(color) {
+  newColor = color.match(/\d{1,3}/g);
+  console.log(newColor);
+  for (let i = 0; i < newColor.length; i++) {
+    newColor[i] -= 25;
+    if (newColor[i] < 0) newColor[i] = 0;
+  }
+
+  return "rgb(" + newColor.join(", ") + ")";
 }
 
 function makeGrid(gridSize) {
@@ -38,9 +49,16 @@ function makeGrid(gridSize) {
     for (let i = 0; i < gridSize; i++) {
       const cell = document.createElement("div");
       cell.classList.add("cell")
+      cell.style.backgroundColor = "#ffffff";
       cell.addEventListener("mouseover", e => {
         if (mouseDown) {
-          if (randomColor) e.target.style.backgroundColor = getRandomColor();
+          if (colorMode == "darken") {
+            previousColor = e.target.style.backgroundColor;
+            e.target.style.backgroundColor = colorDarken(previousColor);
+          }
+          else if (colorMode == "random") {
+            e.target.style.backgroundColor = getRandomColor();
+          }
           else e.target.style.backgroundColor = color;
         }
       });
@@ -51,12 +69,20 @@ function makeGrid(gridSize) {
   }
 }
 
+function randomMode() {
+  colorMode = "random";
+}
+
+function darkenMode() {
+  colorMode = "darken";
+}
+
 gridSlider.oninput = function() {
   makeGrid(this.value);
 }
 
 colorPick.oninput = function() {
-  randomColor = false;
+  colorMode = "picked";
   color = this.value;
 }
 
