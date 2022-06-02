@@ -4,8 +4,8 @@
   --grid-size: 16;
   display: grid;
   background-color: black;
-  gap: 0.1rem;
-  border: 0.1rem solid black;
+  gap: 1px;
+  border: 1px solid black;
   grid-template-columns: repeat(var(--grid-size), 1fr);
   grid-template-rows: repeat(var(--grid-size), 1fr);
 }
