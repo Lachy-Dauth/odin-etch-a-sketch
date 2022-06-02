@@ -14,6 +14,11 @@ function makeGrid(gridSize) {
     for (let i = 0; i < gridSize; i++) {
       const cell = document.createElement("div");
       cell.classList.add("cell")
+      cell.addEventListener("mouseover", e => {
+        e.target.style.backgroundColor = "rgb(100, 100, 100)";
+        console.log(e.target);
+      });
+
       main.appendChild(cell);
       arr.push(cell)
     }
