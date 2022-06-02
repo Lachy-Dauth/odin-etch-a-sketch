@@ -4,6 +4,8 @@ const main = document.createElement("div");
 const gridSlider = document.querySelector("#grid-slider");
 const colorPick = document.querySelector("#color-pick");
 
+let randomColor = true;
+
 let color = "#000"
 
 main.classList.add("grid");
@@ -18,6 +20,15 @@ window.onmouseup = () => {
   --mouseDown;  
 }
 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 function makeGrid(gridSize) {
   main.style.setProperty('--grid-size', gridSize);
   main.innerHTML = "";
@@ -29,7 +40,8 @@ function makeGrid(gridSize) {
       cell.classList.add("cell")
       cell.addEventListener("mouseover", e => {
         if (mouseDown) {
-          e.target.style.backgroundColor = color;
+          if (randomColor) e.target.style.backgroundColor = getRandomColor();
+          else e.target.style.backgroundColor = color;
         }
       });
 
@@ -44,6 +56,7 @@ gridSlider.oninput = function() {
 }
 
 colorPick.oninput = function() {
+  randomColor = false;
   color = this.value;
 }
 
