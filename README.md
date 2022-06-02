@@ -11,6 +11,11 @@ This is a grid based drawing website.
 ### It show be able to:
 - Draw on the grid
 - Turn pen on and off when clicking
+- Produce random colors 
+- Produce selected colors
+- Produce a darkening effect
+- Produce a lightening effect
+- Change the grid size
 
 ## Thoughts
 

@@ -26,18 +26,25 @@ function getRandomColor() {
   for (let i = 0; i < 3; i++) {
     color.push(Math.floor(Math.random() * 256));
   }
-  console.log("rgb(" + color.join(", ") + ")");
   return "rgb(" + color.join(", ") + ")";
 }
 
 function colorDarken(color) {
-  newColor = color.match(/\d{1,3}/g);
-  console.log(newColor);
+  let newColor = color.match(/\d{1,3}/g);
   for (let i = 0; i < newColor.length; i++) {
     newColor[i] -= 25;
     if (newColor[i] < 0) newColor[i] = 0;
   }
 
+  return "rgb(" + newColor.join(", ") + ")";
+}
+
+function colorLighten(color) {
+  let newColor = color.match(/\d{1,3}/g);
+  for (let i = 0; i < newColor.length; i++) {
+    newColor[i] = +newColor[i] + 25;
+    if (newColor[i] > 255) newColor[i] = 255;
+  }
   return "rgb(" + newColor.join(", ") + ")";
 }
 
@@ -57,6 +64,10 @@ function makeGrid(gridSize) {
             previousColor = e.target.style.backgroundColor;
             e.target.style.backgroundColor = colorDarken(previousColor);
           }
+          else if (colorMode == "lighten") {
+            previousColor = e.target.style.backgroundColor;
+            e.target.style.backgroundColor = colorLighten(previousColor);
+          }
           else if (colorMode == "random") {
             e.target.style.backgroundColor = getRandomColor();
           }
@@ -67,6 +78,10 @@ function makeGrid(gridSize) {
         if (colorMode == "darken") {
           previousColor = e.target.style.backgroundColor;
           e.target.style.backgroundColor = colorDarken(previousColor);
+        }
+        else if (colorMode == "lighten") {
+          previousColor = e.target.style.backgroundColor;
+          e.target.style.backgroundColor = colorLighten(previousColor);
         }
         else if (colorMode == "random") {
           e.target.style.backgroundColor = getRandomColor();
@@ -88,11 +103,17 @@ function darkenMode() {
   colorMode = "darken";
 }
 
+function lightenMode() {
+  colorMode = "lighten";
+}
+
 gridSlider.oninput = function() {
-  let size = Math.floor(this.value**1.1);
+  let size = Math.floor((this.value / 2)**1.3);
   makeGrid(size);
   gridSizeText.textContent = size;
 }
+
+gridSlider.oninput();
 
 colorPick.oninput = function() {
   colorMode = "picked";
