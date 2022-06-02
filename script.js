@@ -1,8 +1,9 @@
-const body = document.querySelector("body");
+const body = document.querySelector(".main");
 const main = document.createElement("div");
 
 const gridSlider = document.querySelector("#grid-slider");
 const colorPick = document.querySelector("#color-pick");
+const gridSizeText = document.querySelector("#grid-size");
 
 let colorMode = "darken";
 
@@ -14,10 +15,10 @@ body.appendChild(main);
 
 let mouseDown = 0;  
 window.onmousedown = () => {  
-  ++mouseDown;  
+  mouseDown = 1;  
 }  
 window.onmouseup = () => {  
-  --mouseDown;  
+  mouseDown = 0;  
 }
 
 function getRandomColor() {
@@ -88,7 +89,9 @@ function darkenMode() {
 }
 
 gridSlider.oninput = function() {
-  makeGrid(this.value);
+  let size = Math.floor(this.value**1.1);
+  makeGrid(size);
+  gridSizeText.textContent = size;
 }
 
 colorPick.oninput = function() {
