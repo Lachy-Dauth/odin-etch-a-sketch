@@ -1,3 +1,15 @@
+body {
+  background-color: lightcoral;
+  display: flex;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: center;
+}
+
 .grid {
   width: 50%;
   max-width: 500px;

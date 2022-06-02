@@ -62,6 +62,16 @@ function makeGrid(gridSize) {
           else e.target.style.backgroundColor = color;
         }
       });
+      cell.addEventListener("click", e => {
+        if (colorMode == "darken") {
+          previousColor = e.target.style.backgroundColor;
+          e.target.style.backgroundColor = colorDarken(previousColor);
+        }
+        else if (colorMode == "random") {
+          e.target.style.backgroundColor = getRandomColor();
+        }
+        else e.target.style.backgroundColor = color;
+      });
 
       main.appendChild(cell);
       arr.push(cell)
