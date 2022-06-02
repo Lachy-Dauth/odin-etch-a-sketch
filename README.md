@@ -2,7 +2,7 @@
 
 Created as part of the curriculum for The Odin Project.
 
-[the project is here](https://lachy-dauth.github.io/odin-etch-a-sketch/)
+[The project is here](https://lachy-dauth.github.io/odin-etch-a-sketch/)
 
 ## Functionality 
 
